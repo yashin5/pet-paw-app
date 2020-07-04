@@ -12,7 +12,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  Text,
+  TouchableOpacity,
   StatusBar,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -26,9 +26,24 @@ const Stack = createStackNavigator();
 const imageHeader = (
   <Image style={{marginTop: 25,   width: 120, height: 70}}
     source={require("./src/img/petPawName.png")} 
-  />)
+  />
+);
 
-const App = () => {
+const headerLeft = (
+  <TouchableOpacity>
+    <Image style={{width: 28, height: 20, marginLeft: 20}}
+      source={require("./src/img/iconSide.png")} 
+    />
+  </TouchableOpacity>
+);
+
+const headerRight = (
+  <Image style={{width: 28, height: 30, marginRight: 20}}
+    source={require("./src/img/iconSearch.png")} 
+  />
+);
+
+export default function App(){
   return (
     <NavigationContainer>
       <Stack.Navigator  screenOptions={{headerTitleAlign: "center",
@@ -46,12 +61,11 @@ const App = () => {
           component={CreateAccountScreen}
         />
         <Stack.Screen name="Home" options={{
-          headerLeft: null,
-          headerTitle: props => imageHeader
+          headerLeft: props => headerLeft,
+          headerTitle: props => imageHeader,
+          headerRight: props => headerRight
         }} component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-export default App;
