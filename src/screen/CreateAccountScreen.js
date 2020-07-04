@@ -16,11 +16,11 @@ import InputField from '../component/InputField';
 const width = Dimensions.get('window').width;
 
 export default function CreateAccountScreen(props) {
-  const {name, setName} = useState(null)
-  const {lastName, setLastName} = useState(null)
-  const {email, setEmail} = useState(null)
-  const {password, setPassword} = useState(null)
-  const {birthDate, setBirthDate} = useState(null)
+  const [name, setName] = useState(null)
+  const [lastName, setLastName] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [password, setPassword] = useState(null)
+  const [birthDate, setBirthDate] = useState(null)
 
   
 

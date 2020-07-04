@@ -1,5 +1,5 @@
 // 1
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,94 +15,81 @@ import InputField from '../component/InputField';
 
 const width = Dimensions.get('window').width;
 
-export default class LoginScreen extends Component {
-  constructor() {
-    super();
-    this.state = {email: null, password: null};
-  }
+export default function LoginScreen(props){
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-  email = email => {
-    this.setState({email});
+  const goToCreateAccountScreen = event => {
+    props.navigation.navigate('CreateAccountScreen');
   };
 
-  password = password => {
-    this.setState({password});
+  const login = event => {
+    props.navigation.navigate('Home');
   };
 
-  goToCreateAccountScreen = event => {
-    this.props.navigation.navigate('CreateAccountScreen');
-  };
-
-  login = event => {
-    this.props.navigation.navigate('Home');
-  };
-
-  render() {
-    return (
-      <SafeAreaView style={styles.body}>
-        <StatusBarApp />
-
-        <ScrollView>
-          <View>
-            <View style={styles.titleContainer}>
-              <Image style={styles.logoImage} source={require('../img/logo.png')} />
-            </View>
-            <View style={styles.inputsContainer}>
-            <InputField
-              fields={[
-                {
-                  container: styles.containerInputStyle,
-                  placeholder: 'Email',
-                  placeholderTextColor: '#A9DBF2',
-                  onChangeText: this.name,
-                  value: this.state.name,
-                  style: styles.inputStyle,
-                },
-                {
-                  container: styles.containerInputStyle,
-                  placeholder: 'Senha',
-                  placeholderTextColor: '#A9DBF2',
-                  value: this.state.password,
-                  onChangeText: this.password,
-                  style: styles.inputPasswordStyle,
-                  secureTextEntry: true,
-                  button: (
-                    <TouchableNativeFeedback onPress={this.login}>
-                      <View style={styles.loginButtonStyle}>
-                        <Text style={styles.loginButtonTextStyle}>></Text>
-                      </View>
-                    </TouchableNativeFeedback>
-                  ),
-                },
-              ]}
-            />
-            </View>
-            <View style={styles.borderBaseContainer}>
-              <View style={styles.borderBase} />
-              <Text style={styles.borderBaseText}>ou</Text>
-              <View style={styles.borderBase} />
-            </View>
-            <View style={styles.facebookSymbolBaseContainer}>
-              <View style={styles.facebookSymbolContainer}>
-                <Text style={styles.facebookSymbol}>f</Text>
-              </View>
-              <Text style={styles.facebookSymbolText}>Entre com Facebook</Text>
-            </View>
-            <TouchableNativeFeedback onPress={this.goToCreateAccountScreen}>
-              <View style={styles.registerContainer}>
-                <Text style={styles.registerContainerText}>
-                  Não é cadastrado? Cadastre-se aqui!
-                </Text>
-              </View>
-            </TouchableNativeFeedback>
+  return (
+    <SafeAreaView style={styles.body}>
+      <StatusBarApp />
+      <ScrollView>
+        <View>
+          <View style={styles.titleContainer}>
+            <Image style={styles.logoImage} source={require('../img/logo.png')} />
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
-}
+          <View style={styles.inputsContainer}>
+          <InputField
+            fields={[
+              {
+                container: styles.containerInputStyle,
+                placeholder: 'Email',
+                placeholderTextColor: '#A9DBF2',
+                onChangeText: setEmail,
+                value: email,
+                style: styles.inputStyle,
+              },
+              {
+                container: styles.containerInputStyle,
+                placeholder: 'Senha',
+                placeholderTextColor: '#A9DBF2',
+                value: password,
+                onChangeText: setPassword,
+                style: styles.inputPasswordStyle,
+                secureTextEntry: true,
+                button: (
+                  <TouchableNativeFeedback onPress={login}>
+                    <View style={styles.loginButtonStyle}>
+                      <Text style={styles.loginButtonTextStyle}>></Text>
+                    </View>
+                  </TouchableNativeFeedback>
+                ),
+              },
+            ]}
+          />
+          </View>
+          <View style={styles.borderBaseContainer}>
+            <View style={styles.borderBase} />
+            <Text style={styles.borderBaseText}>ou</Text>
+            <View style={styles.borderBase} />
+          </View>
+          <View style={styles.facebookSymbolBaseContainer}>
+            <View style={styles.facebookSymbolContainer}>
+              <Text style={styles.facebookSymbol}>f</Text>
+            </View>
+            <Text style={styles.facebookSymbolText}>Entre com Facebook</Text>
+          </View>
+          <TouchableNativeFeedback onPress={goToCreateAccountScreen}>
+            <View style={styles.registerContainer}>
+              <Text style={styles.registerContainerText}>
+                Não é cadastrado? Cadastre-se aqui!
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: '#0D94C4',

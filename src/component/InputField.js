@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -12,43 +12,31 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const width = Dimensions.get('window').width;
 
-class InputField extends Component {
-  constructor() {
-    super();
-    this.state = {birthDate: null, date: new Date(), mode: 'date', show: false};
-  }
+export default function InputField(props){
+  const [birthDate, setBirthDate] = useState(null)
+  const [date, setDate] = useState(new Date())
+  const [mode, setMode] = useState("date")
+  const [show, setShow] = useState(false)
 
-  birthDate = birthDate => {
-    this.setState({birthDate});
-  };
-
-  setDate = (event, date) => {
-    date = date || this.state.date;
+  const setDateEvent = (event, dateValue) => {
+    dateValue = dateValue || date;
     const year = date.getFullYear();
     const day = date.getDate();
     const month = date.getMonth() + 1;
 
-    this.setState({
-      show: Platform.OS === 'ios' ? true : false,
-      date,
-      birthDate: `${day}/${month}/${year}`,
-    });
+    setShow(Platform.OS === 'ios' ? true : false);
+    setDate(date);
+    setBirthDate(`${day}/${month}/${year}`)
   };
-
-  show = mode => {
-    this.setState({show: true, mode});
+  const datePicker = () => {
+    setShow('date');
+    setMode(mode);
   };
-
-  datePicker = () => {
-    this.show('date');
-  };
-
-  inputType = field => {
-    const {date, mode, show, birthDate} = this.state;
+  const inputType = field => {
     if (field.type === 'date') {
       return (
         <>
-          <TouchableNativeFeedback onPress={this.datePicker}>
+          <TouchableNativeFeedback onPress={datePicker}>
             <View style={field.container}>
               <Text style={birthDate ? field.style : styles.textFromDateInput}>
                 {birthDate ? birthDate : field.placeholder}
@@ -63,12 +51,12 @@ class InputField extends Component {
               mode={mode}
               is24Hour={true}
               display="spinner"
-              onChange={this.setDate}
+              onChange={setDateEvent}
             />
           )}
         </>
       );
-    }
+    };
     return (
       <>
         <TextInput
@@ -84,16 +72,12 @@ class InputField extends Component {
     );
   };
 
-  render() {
-    return this.props.fields.map(field => (
+    return props.fields.map(field => (
       <View key={field.placeholder} style={field.container}>
-        {this.inputType(field)}
+        {inputType(field)}
       </View>
     ));
-  }
-}
-
-export default InputField;
+  };
 
 const styles = StyleSheet.create({
   birthDateContainer: {
