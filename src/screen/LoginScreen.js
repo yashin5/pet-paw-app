@@ -7,7 +7,6 @@ import {
   View,
   Text,
   Image,
-  // TextInput,
   TouchableNativeFeedback,
   Dimensions,
 } from 'react-native';
@@ -15,7 +14,6 @@ import StatusBarApp from '../component/StatusBarApp';
 import InputField from '../component/InputField';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 export default class LoginScreen extends Component {
   constructor() {

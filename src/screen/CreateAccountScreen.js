@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   View,
   Text,
   Image,
+  BackHandler,
   TouchableNativeFeedback,
   Dimensions,
 } from 'react-native';
@@ -13,7 +14,6 @@ import StatusBarApp from '../component/StatusBarApp';
 import InputField from '../component/InputField';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 export default function CreateAccountScreen(props) {
   const {name, setName} = useState(null)
@@ -104,7 +104,7 @@ export default function CreateAccountScreen(props) {
         </ScrollView>
       </SafeAreaView>
     );
-  }
+  };
 
 const styles = StyleSheet.create({
   body: {

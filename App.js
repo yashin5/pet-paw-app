@@ -11,7 +11,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  View,
+  Image,
   Text,
   StatusBar,
 } from 'react-native';
@@ -23,22 +23,32 @@ import CreateAccountScreen from './src/screen/CreateAccountScreen';
 import Home from './src/screen/Home';
 
 const Stack = createStackNavigator();
+const imageHeader = (
+  <Image style={{marginTop: 25,   width: 120, height: 70}}
+    source={require("./src/img/petPawName.png")} 
+  />)
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LoginScreen">
+      <Stack.Navigator  screenOptions={{headerTitleAlign: "center",
+        headerStyle:{backgroundColor: '#29AAE1', height: 95}}} initialRouteName="LoginScreen"
+      >
         <Stack.Screen
           options={{headerShown: false}}
           name="LoginScreen"
           component={LoginScreen}
         />
         <Stack.Screen
-          options={{headerShown: false}}
+          options={{
+          headerShown: false}}
           name="CreateAccountScreen"
           component={CreateAccountScreen}
         />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" options={{
+          headerLeft: null,
+          headerTitle: props => imageHeader
+        }} component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
