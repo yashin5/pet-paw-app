@@ -20,15 +20,13 @@ export default function SideBarDrawer(props){
             </View>
           </View>
            <View style={routesContainer}>
-              <View style={{flexDirection: "row"}}>
+              <TouchableOpacity onPress={() => props.navigation.navigate('Conta')} style={{flexDirection: "row"}}>
                 <Image style={{marginRight: 20, width: 18, height: 25}} source={require('../img/iconAccount.png')} />
                 <Text style={routesName}>Conta</Text>
-              </View>
-              <TouchableOpacity onPress={() => props.navigation.navigate('Mural')}>
-              <View style={routesContainerRoutes}>
+              </TouchableOpacity>
+              <TouchableOpacity style={routesContainerRoutes} onPress={() => props.navigation.navigate('Mural')}>
                 <Image style={routesIcon} source={require('../img/iconMural.png')} />
                 <Text style={routesName}>Mural</Text>
-              </View>
               </TouchableOpacity>
               <View style={routesContainerRoutes}>
                 <Image style={routesIcon} source={require('../img/iconHelp.png')} />

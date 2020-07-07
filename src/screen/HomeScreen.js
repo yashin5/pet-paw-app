@@ -1,10 +1,7 @@
 import React, {useState, useEffect, Component} from 'react';
 import {
-  ScrollView,
   BackHandler,
-  Text, 
   View,
-  Image
 } from 'react-native';
 import ButtonList from '../component/ButtonList'
 import HeaderBar from '../component/HeaderBar'
@@ -14,20 +11,17 @@ import ImageHeader from '../component/ImageHeader'
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import SideBarDrawer from '../component/SideBarDrawer';
 
-export default function Home(props){
+export default function HomeScreen(props){
+  const backAction = () => {
+    return true;
+  };
+
   useEffect(() => {
-    const backAction = () => {
-      return true;
-    };
+    BackHandler.addEventListener("hardwareBackPress", backAction);
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
+    return () =>
+    BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
-
 
     return (
       <View style={{flex: 1}}>
@@ -42,7 +36,6 @@ export default function Home(props){
           <HeaderBar center={ImageHeader} left={BurgerIcon} right={SearchIcon} />
           <ButtonList icons={icons} />
           </DrawerLayout>
-
       </View >);
 
 };

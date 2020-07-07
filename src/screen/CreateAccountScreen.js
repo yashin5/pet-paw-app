@@ -6,7 +6,6 @@ import {
   View,
   Text,
   Image,
-  BackHandler,
   TouchableNativeFeedback,
   Dimensions,
 } from 'react-native';
