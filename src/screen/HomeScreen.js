@@ -4,7 +4,7 @@ import {
   View,
 } from 'react-native';
 import ButtonList from '../component/ButtonList'
-import HeaderBar from '../component/HeaderBar'
+import Bar from '../component/Bar'
 import BurgerIcon from '../component/BurgerIcon'
 import SearchIcon from '../component/SearchIcon'
 import ImageHeader from '../component/ImageHeader'
@@ -12,29 +12,31 @@ import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import SideBarDrawer from '../component/SideBarDrawer';
 
 export default function HomeScreen(props){
+  const [drawer, setDrawer] = useState(null)
+
   const backAction = () => {
     return true;
   };
+  const openDrawer = () => drawer.openDrawer();
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", backAction);
-
-    return () =>
-    BackHandler.removeEventListener("hardwareBackPress", backAction);
+    return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
     return (
       <View style={{flex: 1}}>
         <DrawerLayout
+          ref={ drawer => setDrawer(drawer)}
           drawerWidth={230}
           drawerPosition={DrawerLayout.positions.Left}
           drawerType='front'
           drawerBackgroundColor="white"
           edgeWidth={50}
           style={{backgroundColor: "red"}}
-          renderNavigationView={() => <SideBarDrawer navigation={props.navigation} userName={"Carol"} />} >
-          <HeaderBar center={ImageHeader} left={BurgerIcon} right={SearchIcon} />
-          <ButtonList icons={icons} />
+          renderNavigationView={() => <SideBarDrawer hideSideBar={drawer} navigation={props.navigation} userName={"Carol"} />} >
+          <Bar center={ImageHeader} left={() => <BurgerIcon callFunc={openDrawer} />} right={SearchIcon} />
+          <ButtonList  icons={icons} />
           </DrawerLayout>
       </View >);
 

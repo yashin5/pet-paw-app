@@ -38,7 +38,7 @@ export default function App(){
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
           }}
-          name="Conta" component={AccountScreen} 
+          name="Account" component={AccountScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>

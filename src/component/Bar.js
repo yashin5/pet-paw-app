@@ -4,7 +4,7 @@ import {View, Text, Dimensions} from 'react-native'
 const width = Dimensions.get('window').width;
 
 
-export default function HeaderBar(props){
+export default function Bar(props){
     return(
         <View style={{ 
             width: width, backgroundColor: '#29AAE1', height: props.height? props.height : 95}}

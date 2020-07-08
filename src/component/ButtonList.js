@@ -8,7 +8,7 @@ export default function ButtonList(props){
         <View style={styles.container}>
             <View style={styles.logoContainer}>
                 {props.icons.map(icon => (
-                    <TouchableWithoutFeedback key={icon.name}>
+                    <TouchableWithoutFeedback  key={icon.name}>
                         <View style={logoContainer}>
                             <Image style={icon.logoStyle} source={icon.image}/>
                             <Text style={icon.nameStyle}>{icon.name}</Text>
