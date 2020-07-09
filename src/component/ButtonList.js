@@ -7,11 +7,11 @@ export default function ButtonList(props){
     return(
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                {props.icons.map(icon => (
-                    <TouchableWithoutFeedback  key={icon.name}>
+                {props.buttons.map(button => (
+                    <TouchableWithoutFeedback onPress={() => props.navigation.navigate(button.route)} key={button.name}>
                         <View style={logoContainer}>
-                            <Image style={icon.logoStyle} source={icon.image}/>
-                            <Text style={icon.nameStyle}>{icon.name}</Text>
+                            <Image style={button.logoStyle} source={button.image}/>
+                            <Text style={button.nameStyle}>{button.name}</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 ))}

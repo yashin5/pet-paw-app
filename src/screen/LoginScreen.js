@@ -20,7 +20,7 @@ export default function LoginScreen(props){
   const [password, setPassword] = useState(null);
 
   const goToCreateAccountScreen = event => {
-    props.navigation.navigate('CreateAccountScreen');
+    props.navigation.navigate('CreateAccount');
   };
 
   const login = event => {

@@ -36,17 +36,18 @@ export default function HomeScreen(props){
           style={{backgroundColor: "red"}}
           renderNavigationView={() => <SideBarDrawer hideSideBar={drawer} navigation={props.navigation} userName={"Carol"} />} >
           <Bar center={ImageHeader} left={() => <BurgerIcon callFunc={openDrawer} />} right={SearchIcon} />
-          <ButtonList  icons={icons} />
+          <ButtonList navigation={props.navigation} buttons={buttons} />
           </DrawerLayout>
       </View >);
 
 };
 
-const icons = [{
+const buttons = [{
   image: require("../img/iconPat.png"),
   logoStyle: {width: 90, height: 79, marginTop: 30},
   name: "Mascotes",
-  nameStyle: {fontSize: 17, color: "grey", marginTop: 10}
+  nameStyle: {fontSize: 17, color: "grey", marginTop: 10},
+  route: "Pets"
 },
 {
   name: "Agenda",
