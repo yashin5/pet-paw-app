@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useNavigationParam, useEffect} from 'react';
 import {
   BackHandler,
   View,
@@ -6,7 +6,7 @@ import {
   Dimensions,
   ScrollView,
   Button,
-  TouchableOpacity,
+  TouchableNativeFeedback,
   Text,
 } from 'react-native';
 import Bar from '../component/Bar'
@@ -20,25 +20,26 @@ import FloatingButton from '../component/FloatingButton';
 
 const height = Dimensions.get('window').height;
 
-export default function PetsScreen({navigation}){
+export default function Pet({route, navigation}){
   const [drawer, setDrawer] = useState(null)
+  const { petUrl } = route.params;
+
   const [edit, setEdit] = useState(false)
 
     const goBack = () => navigation.goBack();
     const openDrawer = () => drawer.openDrawer();
-    const goEdit = () => edit? setEdit(false) : setEdit(true);
-    const goToPet = (pet) => navigation.navigate('Pet', {petUrl: pet.petUrl});
-    const goToNewPet = () => navigation.navigate('NewPet')
+    const goTo = () => navigation.navigate("PetsScreen", {screen: "PetsScreen"})
+
     useEffect(() => {  
       BackHandler.addEventListener("hardwareBackPress", goBack);
-  
       return () =>
       BackHandler.removeEventListener("hardwareBackPress", goBack);
     }, []);
       
     const pets = [
-        {petImage: require("../img/petIcon.jpg"), petName: "Salém", petUrl: "salem"},
-        {petImage: require("../img/petIcon.jpg"), petName: "José", petUrl: "jose"}
+        {petImage: require("../img/petIcon.jpg"), petName: petUrl}
+
+
     ]
     return(
         <View style={{flex: 1}}>
@@ -52,31 +53,30 @@ export default function PetsScreen({navigation}){
           style={{backgroundColor: "red"}}
           renderNavigationView={() => <SideBarDrawer hideSideBar={drawer} navigation={navigation} userName={"Carol"} />} >
           <Bar center={"Mascotes"} left={() => <BurgerIcon callFunc={openDrawer} />} right={SearchIcon} />
-            <ScrollView >
+            <ScrollView>
                 <View style={container}>
                     {pets.map((item, index) => (
-                        <View  style={containerPetStyle}>
-                            <TouchableOpacity onPress={() => goToPet(item)} key={index}>
-                                <Image style={petImageStyle}
-                                        source={item.petImage} 
-                                    />
-                            </TouchableOpacity>
+                        <View key={index} style={containerPetStyle}>
+                            <Image style={petImageStyle}
+                                    source={item.petImage} 
+                                />
                             <Text style={petNameStyle} >{item.petName}</Text>
                         </View>
                     ))}
                 </View>
             </ScrollView>
                 <View style={{alignItems: "center"}}>
-                    <FloatingButton callFunc={() => goToNewPet()} icon={require("../img/addIcon.png")} />
+                    <FloatingButton callFunc={() => goTo()} icon={require("../img/addIcon.png")} />
                 </View>
-                <Bar style={bottomBar} bottom={true} left={() => <GoBackIcon callFunc={goBack} />}  height={50} />
+            <Bar style={bottomBar} left={() => <GoBackIcon callFunc={goBack} />}  height={50} />
+
           </DrawerLayout>
       </View >
       );   
 };
 
-const container = {marginTop: 20, flexDirection: "row", flexWrap: "wrap"};
-const containerPetStyle = { marginBottom: 10, alignItems: "center", justifyContent: "center"};
-const petImageStyle = {width: 148, height: 140, marginLeft: 20};
-const petNameStyle = {margin: 0, fontSize: 20, color: "grey"};
+const container = {marginTop: 20, flexDirection: "row", flexWrap: "wrap"}
+const containerPetStyle = { marginBottom: 10, alignItems: "center", justifyContent: "center"}
+const petImageStyle = {width: 148, height: 140, marginLeft: 20}
+const petNameStyle = {margin: 0, fontSize: 20, color: "grey"}
 const bottomBar = {flexDirection: "row", justifyContent: "space-between", marginTop: 10};

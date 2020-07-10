@@ -16,13 +16,16 @@ import CreateAccountScreen from './src/screen/CreateAccountScreen';
 import HomeScreen from './src/screen/HomeScreen';
 import AccountScreen from './src/screen/AccountScreen';
 import PetsScreen from './src/screen/PetsScreen';
+import Pet from './src/screen/Pet';
+import NewPetScreen from './src/screen/NewPetScreen';
+
 
 const Stack = createStackNavigator();
 
 export default function App(){
   return (
     <NavigationContainer>
-      <Stack.Navigator  headerMode={"none"} initialRouteName="LoginScreen">
+      <Stack.Navigator  headerMode={"none"} initialRouteName="Login">
         <Stack.Screen
           options={{
             headerShown: false
@@ -46,6 +49,18 @@ export default function App(){
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
           }}
           name="Pets" component={PetsScreen} 
+        />
+        <Stack.Screen 
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+          }}
+          name="Pet" component={Pet} 
+        />
+        <Stack.Screen 
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+          }}
+          name="NewPet" component={NewPetScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>

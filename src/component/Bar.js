@@ -2,14 +2,15 @@ import React, {useState} from 'react'
 import {View, Text, Dimensions} from 'react-native'
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 
 export default function Bar(props){
     const centerRenderIconOrSpan = (prop) => props.center?  <props.center/> : <Text style={spanTag}> </Text>
 
     return(
-        <View style={{ 
-            width: width, backgroundColor: '#29AAE1', height: props.height? props.height : 95}}
+        <View style={{width: width, backgroundColor: '#29AAE1',
+         height: props.height? props.height : 95}}
         >
             <View style={props.style? props.style : {flexDirection: "row", justifyContent: "space-between", marginTop: 45}}>
                 <props.left />
