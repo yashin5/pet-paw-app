@@ -55,7 +55,7 @@ export default function PetsScreen({navigation}){
             <ScrollView >
                 <View style={container}>
                     {pets.map((item, index) => (
-                        <View  style={containerPetStyle}>
+                        <View  key={index} style={containerPetStyle}>
                             <TouchableOpacity onPress={() => goToPet(item)} key={index}>
                                 <Image style={petImageStyle}
                                         source={item.petImage} 
