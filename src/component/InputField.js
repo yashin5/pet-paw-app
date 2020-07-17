@@ -20,12 +20,12 @@ export default function InputField(props){
 
   const setDateEvent = (event, dateValue) => {
     dateValue = dateValue || date;
-    const year = date.getFullYear();
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
+    const year = dateValue.getFullYear();
+    const day = dateValue.getDate();
+    const month = dateValue.getMonth() + 1;
 
     setShow(Platform.OS === 'ios' ? true : false);
-    setDate(date);
+    setDate(dateValue);
     setBirthDate(`${day}/${month}/${year}`)
   };
   const datePicker = () => {

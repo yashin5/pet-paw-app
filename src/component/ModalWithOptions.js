@@ -13,14 +13,14 @@ export default function ModalWithOptions(props){
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <TouchableOpacity onPress={() => props.setModalVisible(false)} 
+            <TouchableOpacity  onPress={() => props.setModalVisible(false)} 
               style={{width: width/1.13, marginTop: 13}}
             >
               <Image style={{alignSelf: "flex-start", width: 20, height: 20}} source={(require("../img/xIcon.png"))} />
             </TouchableOpacity>
             <View>
             {props.options.map((field, index) => (
-              <TouchableOpacity onPress={() => {props.setModalVisible(false); props.optFunc? props.optFunc(field): null}}
+              <TouchableOpacity  key={index} onPress={() => {props.setModalVisible(false); props.optFunc? props.optFunc(field): null}}
                 style={index != 0? styles.containerOptionsStyleWithMargin : styles.containerOptionsStyle}>
                 <Text style={styles.optionsStyle}>{field}</Text>
               </TouchableOpacity>

@@ -23,4 +23,4 @@ export default function Bar(props){
 };
 
 const textStyle = {color: "white", fontWeight: "bold", fontSize: 20}
-const spanTag = {width: 33, height: 30, marginRight: 20}
+const spanTag = {width: 28, height: 30, marginRight: 20}
